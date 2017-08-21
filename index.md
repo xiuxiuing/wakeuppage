@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/xiuxiuing/wakeuppage/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xiuxiuing/wakeuppage/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<a href="wakeup://xx" style="font-size:37px">直接使用自定义协议打开(微信微博里面没反应)</a>
+<br/>
+<br/>
+<br/>
+<a href="http://yeq.moonforest.org:61593/wakeup?r=http%3A%2F%2F163.com" style="font-size:37px">使用http请求打开</a>
+<div id="div1" style="font-size:27px"></div>
+</body>
+</html>
+<script>
+    function request() {//TODO 后台循环请求
+        var ports = new Array(61593, 41123, 43387, 39083, 24423, 16834, 9289, 8452, 6217, 5300, 4118, 3787, 2998);
+        var url = "http://yeq.moonforest.org";
+        var path = "/wakeup";
+        var ajax = new XMLHttpRequest();
+        for (var i = 0; i < ports.length; i++) {
+            var realUrl = url + ":" + ports[i] + path;
+            ajax.open("GET", realUrl, true);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var content = ajax.responseText;
+                    document.getElementById("div1").innerHTML = content;
+                    return;
+                }
+            }
+        }
+    }
+</script>
